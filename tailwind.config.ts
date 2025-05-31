@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
 	darkMode: ["class"],
@@ -61,13 +62,21 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+        /* PRD specific accent colors not covered by semantic vars */
+        'ds-accent-green': '#198754',
+        'ds-accent-orange': '#FD7E14',
 			},
 			borderRadius: {
-				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+        /* Default radius is 'md' (0.375rem) as per PRD, which is set by --radius in CSS */
+        /* Shadcn UI often uses 'lg' as the main radius, mapped to --radius */
+				lg: 'var(--radius)', /* 0.375rem */
+				md: 'calc(var(--radius) - 2px)', /* 0.375rem - 2px */
+				sm: 'calc(var(--radius) - 4px)' /* 0.375rem - 4px */
 			},
+      fontFamily: {
+        sans: ['Nunito', ...defaultTheme.fontFamily.sans], /* PRD primaryFont */
+      },
 			keyframes: {
 				'accordion-down': {
 					from: {
